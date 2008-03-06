@@ -140,9 +140,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				POINT pt;
 				GetCursorPos(&pt);
 				HMENU hMenu = CreatePopupMenu();
-				AppendMenu(hMenu,MF_STRING,IDM_ABOUT,"About...");
+				AppendMenu(hMenu,MF_STRING,IDM_ABOUT,L"About...");
 				AppendMenu(hMenu,MF_SEPARATOR,0,0);
-				AppendMenu(hMenu,MF_STRING,IDM_EXIT,"Exit");
+				AppendMenu(hMenu,MF_STRING,IDM_EXIT,L"Exit");
 				TrackPopupMenu(hMenu,TPM_RIGHTALIGN,pt.x,pt.y,0,hWnd,NULL);
 				DestroyMenu(hMenu);
 			}
@@ -204,7 +204,7 @@ void ClipboardConverter(HWND hWnd)
 	// Get data from Clipboard
 	if (!OpenClipboard(hWnd)) 
         return; 
-	HGLOBAL handle = GetClipboardData(CF_TEXT/*CF_UNICODETEXT*/);
+	HGLOBAL handle = GetClipboardData(CF_UNICODETEXT);
 	LPCTSTR text = (LPCTSTR)GlobalLock(handle);
 	int siz = lstrlen(text);
 	if (siz)
@@ -221,7 +221,7 @@ void ClipboardConverter(HWND hWnd)
 		if (!OpenClipboard(hWnd)) 
 			return; 
 		EmptyClipboard();
-		SetClipboardData(CF_TEXT,textData);
+		SetClipboardData(CF_UNICODETEXT,textData);
 		GlobalUnlock(global);
 		//GlobalFree(global);
 		CloseClipboard();
