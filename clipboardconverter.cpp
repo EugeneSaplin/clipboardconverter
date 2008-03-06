@@ -83,6 +83,21 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
+	bool AlreadyRunning;
+
+    HANDLE hMutexOneInstance = ::CreateMutex( NULL, TRUE,
+		_T("CBCONVERTER-1234214AA-EF65-4ec8-A54B-0A15581D103B"));
+
+    AlreadyRunning = (GetLastError() == ERROR_ALREADY_EXISTS);
+
+    if (hMutexOneInstance != NULL) 
+    {
+        ::ReleaseMutex(hMutexOneInstance);
+    }
+	if ( AlreadyRunning ) 
+		return FALSE;
+
+
 	HWND hWnd;
 
 	hInst = hInstance; // Store instance handle in our global variable
@@ -137,6 +152,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		    break;
 		case WM_RBUTTONDOWN:
 			{
+				SetForegroundWindow(hWnd);
 				POINT pt;
 				GetCursorPos(&pt);
 				HMENU hMenu = CreatePopupMenu();
