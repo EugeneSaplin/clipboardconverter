@@ -71,7 +71,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 	wcex.cbClsExtra		= 0;
 	wcex.cbWndExtra		= 0;
 	wcex.hInstance		= hInstance;
-	wcex.hIcon			= LoadIcon(hInstance, (LPCTSTR)IDI_CLIPBOARDCONVERTER);
+	wcex.hIcon			= LoadIcon(hInstance, (LPCTSTR)IDC_CLIPBOARDCONVERTER);
 	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
 	wcex.lpszMenuName	= (LPCTSTR)IDC_CLIPBOARDCONVERTER;
@@ -111,10 +111,10 @@ BOOL TrayMessage(HWND hWnd,DWORD dwMessage)
 
 	tnd.cbSize		= sizeof(NOTIFYICONDATA);
 	tnd.hWnd		= hWnd;
-	tnd.uID			= IDI_CLIPBOARDCONVERTER;
+	tnd.uID			= IDC_CLIPBOARDCONVERTER;
 	tnd.uFlags		= NIF_MESSAGE|NIF_ICON;
 	tnd.uCallbackMessage	= MYWM_NOTIFYICON;
-	HICON hIcon = LoadIcon(hInst, MAKEINTRESOURCE (IDI_CLIPBOARDCONVERTER));
+	HICON hIcon = LoadIcon(hInst, MAKEINTRESOURCE (IDC_CLIPBOARDCONVERTER));
 	tnd.hIcon = hIcon;
 	tnd.uFlags		= NIF_MESSAGE|NIF_ICON|NIF_TIP;
 
